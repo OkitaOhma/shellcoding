@@ -1,0 +1,12 @@
+break line#
+list
+set variable p = argv[1]
+disassemble main
+set disassembly-flavor intel
+nasm -f elf64 demo.nasm -o demo.o
+ld demo.o -o demo
+objdump -D -M intel demo.o
+lscpu
+cat /proc/cpuinfo
+gcc -ggdb main.c -o main
+gdb -q main

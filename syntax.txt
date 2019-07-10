@@ -1,0 +1,15 @@
+nasm -f elf64 demo.nasm -o demo.o
+ld demo.o -o demo
+objdump -D -M intel demo.o
+lscpu
+cat /proc/cpuinfo
+gcc -ggdb main.c -o main
+gdb -q main
+/usr/include/x86_64-linux-gnu/asm/unistd_64.h
+objdump -D -M intel -d hw
+objdump -M intel -d newhw
+gdb -q ./saferhw -tui
+layout asm
+layout regs
+gcc -fno-stack-protector -z execstack shellcode.c -o shellcode
+for i in $(objdump -d shellcode |grep "^ " |cut -f2); do echo -n;\x'$i; done;echo sehllcode
